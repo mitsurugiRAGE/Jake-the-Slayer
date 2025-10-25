@@ -4,10 +4,10 @@
 
 int main(void)
 {
-    const char * CREDENTIAL = ".cred";
-    FILE * fp = fopen(CREDENTIAL, "r");
+    const char * CREDENTIAL = ".cred"; // 자격 증명 파일 이름 지정
+    FILE * fp = fopen(CREDENTIAL, "r"); // 자격 증명 파일을 읽기 모드로 열기
 
-    char line[1024];
+    char line[1024]; // 자격 증명 파일 전체를 저장할 버퍼
     char id_buf[32];
     char passwd_buf[32];
 
