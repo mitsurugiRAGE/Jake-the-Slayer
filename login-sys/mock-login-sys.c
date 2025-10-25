@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+
 #include "credential.h"
 
 int main(void)
@@ -7,27 +8,27 @@ int main(void)
     const char * CREDENTIAL = ".cred"; // 자격 증명 파일 이름 지정
     FILE * fp = fopen(CREDENTIAL, "r"); // 자격 증명 파일을 읽기 모드로 열기
 
-    char line[1024]; // 자격 증명 파일 전체를 저장할 버퍼
-    char id_buf[32];
-    char passwd_buf[32];
+    char id_buf[32]; // 자격증명 원본 id를 저장할 버퍼
+    char passwd_buf[32]; // 자격증명 원본 패스워드를 저장할 버퍼
 
-    char id_input[32];
-    char passwd_input[32];
+    char id_input[32]; // 사용자가 입력한 id를 저장할 버퍼
+    char passwd_input[32]; // 사용자가 입력한 패스워드를 저장할 버퍼
 
-    int line_size = sizeof(line) / sizeof(char);
-
-    import_credential(fp, line, line_size, id_buf, passwd_buf);
-  
     login_window(id_input, passwd_input);
-
-    if (!(strcmp(id_buf, id_input)) && !(strcmp(passwd_buf, passwd_input)))
+    import_credential(fp, id_buf, passwd_buf, id_input);
+  
+    /* 만약 입력된 id와 패스워드가 `.cred`에 있는 것과 모두 일치한다면 */
+    if (!strcmp(id_buf, id_input) && !strcmp(passwd_buf, passwd_input))
     {
-      printf("WELCOME! %s!", id_buf);
+        // 환영 메시지 출력
+        printf("WELCOME! %s!", id_buf);
     }
 
+    /* 입력된 것과 `.cred`의 정보가 하나라도 불일치한다면 */ 
     else
     {
-      printf("ID or password is INCORRECT.\n");
+        // id나 패스워드가 잘못되었다고 출력
+        printf("ID or password is INCORRECT.\n");
     }
 
     fclose(fp);
