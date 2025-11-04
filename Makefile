@@ -43,5 +43,5 @@ run-login: $(LOGIN_BIN)
 # ===== clear =====
 .PHONY: clean
 clean:
-	$(RM) $(LOGIN_OBJS)
-## clean: $(RM) $(LOGIN_OBJS) $(SLAYER_OBJS)
+	$(RM) $(LOGIN_OBJS) $(LOGIN_BIN)
+## clean: $(RM) $(LOGIN_OBJS) $(SLAYER_OBJS) $(LOGIN_BIN) $(SLAYER_BIN)

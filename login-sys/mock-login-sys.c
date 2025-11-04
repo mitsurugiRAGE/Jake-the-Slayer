@@ -5,7 +5,7 @@
 
 int main(void)
 {
-    const char * CREDENTIAL = ".cred"; // 자격 증명 파일 이름 지정
+    const char * CREDENTIAL = "login-sys/.cred"; // 자격 증명 파일 이름 지정
     FILE * fp = fopen(CREDENTIAL, "r"); // 자격 증명 파일을 읽기 모드로 열기
 
     char id_buf[32]; // 자격증명 원본 id를 저장할 버퍼
