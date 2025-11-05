@@ -39,8 +39,8 @@ all: $(LOGIN_BIN)
 $(LOGIN_BIN): $(LOGIN_OBJS) | $(LOGIN_BIN_DIR)
 	$(CC) $(CFLAGS) $^ -o $@
 
-$(LOGIN_BUILD_DIR)/%.o: $(LOGIN_SRC_DIR)/%.c | $(LOGIN_BULID_DIR)
-	$(CC) $(CFLAGS) -MMD -MP -I $(LOGIN_INC_DIR) -c $< -o $@
+$(LOGIN_BUILD_DIR)/%.o: $(LOGIN_SRC_DIR)/%.c | $(LOGIN_BUILD_DIR)
+	$(CC) $(CFLAGS) -MMD -MP -I$(LOGIN_INC_DIR) -c $< -o $@
 
 $(LOGIN_BUILD_DIR) $(LOGIN_BIN_DIR):
 	mkdir -p $@
@@ -48,8 +48,8 @@ $(LOGIN_BUILD_DIR) $(LOGIN_BIN_DIR):
 ## $(SLAYER_BIN): $(SLAYER_OBJS) | $(SLAYER_BIN_DIR)
 ##	$(CC) $(CFLAGS) $^ -o $@
 
-## $(SLAYER_BUILD_DIR)/%.o: $(SLAYER_SRC_DIR)/%.c | $(SLAYER_BULID_DIR)
-##	$(CC) $(CFLAGS) -MMD -MP -I $(SLAYER_INC_DIR) -c $< -o $@
+## $(SLAYER_BUILD_DIR)/%.o: $(SLAYER_SRC_DIR)/%.c | $(SLAYER_BUILD_DIR)
+##	$(CC) $(CFLAGS) -MMD -MP -I$(SLAYER_INC_DIR) -c $< -o $@
 
 ## $(SLAYER_BUILD_DIR) $(SLAYER_BIN_DIR):
 ##	mkdir -p $@
