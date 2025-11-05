@@ -1,3 +1,5 @@
 *.o
+*.d
 *.out
-login-sys/mock-login
+login-sys/build/
+login-sys/bin/

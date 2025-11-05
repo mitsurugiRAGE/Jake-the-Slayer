@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "credential.h"
+#include "../include/credential.h"
 
 void login_window(char * id_, char * passwd_)
 {
