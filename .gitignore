@@ -3,3 +3,5 @@
 *.out
 login-sys/build/
 login-sys/bin/
+slayer/build/
+slayer/bin/
