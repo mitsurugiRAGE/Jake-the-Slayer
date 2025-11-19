@@ -30,8 +30,10 @@ SLAYER_OBJS := $(patsubst $(SLAYER_SRC_DIR)/%.c,$(SLAYER_BUILD_DIR)/%.o,$(SLAYER
 SLAYER_DEPS := $(SLAYER_OBJS:.o=.d)
 
 # ===== Targets =====
+jake_logo_copy: jake_logo
+	cp jake_logo slayer/bin/jake_logo
 .PHONY: all
- all: $(LOGIN_BIN) $(SLAYER_BIN)
+all: $(LOGIN_BIN) $(SLAYER_BIN) jake_logo_copy
 
 # ===== Build Rules =====
 $(LOGIN_BIN): $(LOGIN_OBJS) | $(LOGIN_BIN_DIR)
