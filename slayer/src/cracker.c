@@ -7,6 +7,7 @@
 void crack(FILE * wordlist, FILE * cred)
 {
     FILE * output_file = fopen("./slayed.txt", "w");
+
     char cred_id[32];
     char cred_pw[32];
     char cred_line[128];
@@ -52,6 +53,7 @@ void crack(FILE * wordlist, FILE * cred)
     }
 
     printf("==================\n");
+    fclose(output_file);
 }
 
 
