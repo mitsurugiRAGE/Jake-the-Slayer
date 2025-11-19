@@ -1,6 +1,7 @@
 *.o
 *.d
 *.out
+slayed.txt
 login-sys/build/
 login-sys/bin/
 slayer/build/
