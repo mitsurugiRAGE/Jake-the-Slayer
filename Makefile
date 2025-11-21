@@ -64,4 +64,4 @@ run-jake: $(SLAYER_BIN)
 clean:
 	$(RM) $(LOGIN_OBJS) $(SLAYER_OBJS) $(LOGIN_DEPS) $(SLAYER_DEPS) $(LOGIN_BIN) $(SLAYER_BIN)
 
--include $(LOGIN_DEPS)
+-include $(LOGIN_DEPS) $(SLAYER_DEPS)
