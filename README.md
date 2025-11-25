@@ -1,36 +1,92 @@
-# Jake the Slayer
-## 개요
-- 구상 프로젝트: 간단한 모의 로그인 시스템 (시연을 위한 보조 프로그램) + **패스워드 크래커** (메인 프로그램) 
-- 프로젝트명: Jake the Slayer
-- 프로젝트 주제: Offensive Security, Hash, Password Cracking, Brute-force Attack
-- 프로젝트 목적:
-    1. 해싱된 패스워드를 무차별 대입 공격을 통하여 복구시킬 수 있음을 보인다.
-    2. 시연을 통해 단순한 패스워드는 보안적으로 취약함을 경각시킨다.
-- 프로젝트 선택 동기:
->최근 대한민국 통신사 해킹 사건과 정부 시스템 해킹 사건이 빈번하게 일어나며
->보안에 대한 관심이 뜨거워지고 있음.
->그간 해킹 사건 중에는 데이터베이스의 사용자 정보를 탈취하는데 성공한 사건도 다수 있음.
->많은 서비스들이 애용하는 정석적인 보안 패턴과 그 파훼법을 공격적 보안(Offensive Security) 관점에서 탐구해 보고자 함.
+# Jake the Slayer: Password Cracker (C Language Project)
+djb2 해시 알고리즘을 사용하는 간단한 패스워드 크래킹 도구입니다.
 
-## 주요 기능
-- 모의 로그인 시스템 (구현 완료)
-    - 미리 생성된 파일을 바탕으로 로그인 성공과 실패를 판정하는 프로그램
-    - ID와 패스워드가 하드코딩 되어 있는 것이 아닌 자격 증명이 기입된 파일의 입출력을 통해 검사
-- 해싱 함수 (착수 예정)
-    - 정석적인 패스워드 보관 방법은 그것을 평문으로 보관하는 것이 아닌 단방향 함수를 사용하여 원본 문자열을 알아 볼 수 없게 처리 한 후 보관하는 것임
-    - 해싱 함수는 `MD5`나 `djb2`같은 함수를 구현해 볼 예정
-- 패스워드 크래커
-    - 사용자에 의해 지정된 Password List의 평문 패스워드를 해싱하여 유출된 정보와 비교해 비밀번호를 복원하는 프로그램
-    - 기능
-        1. 지정된 Password List의 비밀번호들을 하나씩 가져와
-        2. 해싱하고
-        3. 그것을 유출된 데이터와 비교 한 뒤
-        4. 비밀번호를 복원,
-        5. 모든 결과를 출력
-- 기타 필요한 것들
-    - 더미 데이터 (제작 완료)
-        - 모의 로그인 시스템의 자격 증명(Credential)이자 유출된 정보 역할을 할 것임
-    - Password List (준비 완료)
-        - 패스워드 크래커가 사용할 패스워드 리스트
-## GitHub Repository
-[https://github.com/mitsurugiRAGE/Jake-the-Slayer](https://github.com/mitsurugiRAGE/Jake-the-Slayer)
+```text
+   ___  ___   _   __ _____
+  |_  |/ _ \ | | / /|  ___|
+    | / /_\ \| |/ / | |__
+    | |  _  ||    \ |  __|
+/\__/ / | | || |\  \| |___
+\____/\_| |_/\_| \_/\____/
+
+
+ _   _
+| | | |
+| |_| |__   ___
+| __| '_ \ / _ \
+| |_| | | |  __/
+ \__|_| |_|\___|
+
+
+ _____ _       _____   _____________
+/  ___| |     / _ \ \ / /  ___| ___ \
+\ `--.| |    / /_\ \ V /| |__ | |_/ /
+ `--. \ |    |  _  |\ / |  __||    /
+/\__/ / |____| | | || | | |___| |\ \
+\____/\_____/\_| |_/\_/ \____/\_| \_|
+```
+
+## 프로젝트 개요
+Jake the Slayer는 유출된 크리덴셜 파일과 워드리스트를 비교하여 평문 패스워드를 찾아내는 간단한 프루트 포스 크래커입니다.
+학습 및 교육을 목적으로 제작된 프로젝트로, 실제 서비스와 보안 환경 등에 악용을 금합니다.
+## 기능
+- djb2 기반 단방향 해시 함수 구현
+- 유출된 credential 테이블 파싱 기능
+- 워드리스트 기반 브루트 포스 매칭
+- 매칭 실패 시 "PASSWORD NOT FOUND" 출력
+- 간단한 텍스트 로고 출력
+## 프로젝트 구조
+```tree
+Jake-the-Slayer
+├── jake_logo
+├── login-sys
+│   ├── bin
+│   ├── build
+│   ├── include
+│   │   ├── credential.h
+│   │   └── hash.h
+│   └── src
+│       ├── .cred
+│       ├── credential.c
+│       ├── hash.c
+│       └── mock-login-sys.c
+├── Makefile
+├── README.md
+└── slayer
+    ├── bin
+    ├── build
+    ├── include
+    │   ├── cracker.h
+    │   └── hash.h
+    └── src
+        ├── cracker.c
+        ├── hash.c
+        ├── head-rockyou.txt
+        ├── jake.c
+        └── leaked_cred
+```
+## 클론과 빌드
+- 아래 명령으로 레포지터리를 클론합니다:
+```sh
+$ mkdir ~/Jake; git clone https://github.com/mitsurugiRAGE/Jake-the-Slayer.git ~/Jake
+```
+- 생성된 프로젝트 디렉터리로 이동하고 빌드합니다 (Makefile 사용):
+```sh
+$ cd ~/Jake; make
+```
+- 빌드가 완료되었으면, 아래 명령으로 로그인 시스템 실행 할 수 있습니다:
+```sh
+$ make run-login
+```
+- 또한 아래 명령으로 패스워드 크래커 실행를 실행할 수 있습니다:
+```sh
+$ make run-jake ARGS="./slayer/src/head-rockyou.txt ./slayer/src/leaked_cred"
+```
+## 테스트 환경
+- OS: Debian GNU/Linux 12 (bookworm) aarch64
+- Hardware: Raspberry Pi 5 Model B
+- Compiler: GCC 12.2.0 (Debian 12.2.0-14+deb12u1)
+- Shell: zsh 5.9
+## LICENSE
+이 프로젝트는 MIT License 하에 배포됩니다.
+자세한 내용은 저장소의 [LICENSE](./LICENSE)를 참고하세요.
